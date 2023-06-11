@@ -26,23 +26,23 @@ class MyRange:
         return temp
 
 
-print("Testing1")
+print("Test1")
 for num in MyRange(0, 9, 1):
     print(num)
 
-print("Testing2")
+print("Test2")
 for num in MyRange(0, 9, -2):
     print(num)
 
-print("Testing3")
+print("Test3")
 for num in MyRange(9, 0, -2):
     print(num)
 
-print("Testing4")
+print("Test4")
 for num in MyRange(-9, 0):
     print(num)
 
-print("Testing5")
+print("Test5")
 for num in MyRange(0, -9, -1):
     print(num)
 
