@@ -4,7 +4,6 @@ class Node:
         self.right = None
         self.data = data
 
-
 class BinaryTree:
     def __init__(self):
         self.root = None
@@ -45,24 +44,66 @@ class BinaryTree:
         return 1+max(self.height(root.left), self.height(root.right))
 
     def print_node_val(self, root, h):
-        if h < 1:
-            return
-        if h == 1:
+        if h == 1 and root:
             print(root.data, end=" ")
-        else:
+        elif root is not None:
             self.print_node_val(root.left, h-1)
             self.print_node_val(root.right, h-1)
-    def level_order_dfs(self):
+
+    def level_order_recursive(self):
         h = self.height(self.root)
         for level in range(1, h+1):
             self.print_node_val(self.root, level)
+
+    def preorder_iterative(self):
+        s = list()
+        s.append(self.root)
+        temp = self.root
+        while s:
+            while temp:
+                yield temp
+                temp = temp.left
+                if temp:
+                    s.append(temp)
+            if not s:
+                break
+            temp = s.pop()
+            temp = temp.right
+            if temp:
+                s.append(temp)
+
+    def lowest_common_ancestor(self, root, value_a, value_b):
+        if root is None:
+            return None
+        if root.data == value_a or root.data == value_b:
+            return root
+        root_a = self.lowest_common_ancestor(root.left, value_a, value_b)
+        root_b = self.lowest_common_ancestor(root.right, value_a, value_b)
+        if root_a and root_b:
+            return root
+        return root_a if root_a else root_b
 
 
 obj = BinaryTree()
 for i in range(1, 16):
     obj.insert(i)
 
+print("Print node data using bfs technique")
 for node in obj.level_order():
-    print(node.data)
+    print(node.data, end=" ")
 
-obj.level_order()
+print("\nPrint node data using dfs technique")
+obj.level_order_recursive()
+
+print("\n Preorder traverse using iterative")
+for node in obj.preorder_iterative():
+    print(node.data, end=" ")
+
+print("\nlca of 12 and 15")
+print(obj.lowest_common_ancestor(obj.root, 12, 15).data)
+
+print("lca of 5 and 7")
+print(obj.lowest_common_ancestor(obj.root, 5, 7).data)
+
+print("lca of 12 and 13")
+print(obj.lowest_common_ancestor(obj.root, 12, 13).data)
