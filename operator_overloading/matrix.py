@@ -1,6 +1,7 @@
 class Matrix(object):
     def __init__(self, mat):
         self.mat = mat
+
     def __add__(self, other):
         if len(self.mat) != len(other.mat) or len(self.mat[0]) != len(other.mat[0]):
             raise ValueError("Invalid matrix size")
@@ -9,6 +10,7 @@ class Matrix(object):
             for col in range(len(self.mat[0])):
                 result[row][col] = self.mat[row][col] + other.mat[row][col]
         return result
+
     def __sub__(self, other):
         if len(self.mat) != len(other.mat) or len(self.mat[0]) != len(other.mat[0]):
             raise ValueError("Invalid matrix size")
