@@ -1,8 +1,18 @@
 class Matrix(object):
     def __init__(self, mat):
+        """
+            Initialize matrix class with m*n size list
+        :param mat:
+        """
         self.mat = mat
 
     def __add__(self, other):
+        """
+        + operator is overloaded to do addition of
+            two matrices
+        :param other:
+        :return:
+        """
         if len(self.mat) != len(other.mat) or len(self.mat[0]) != len(other.mat[0]):
             raise ValueError("Invalid matrix size")
         result = [[0]*len(self.mat[0])]*len(self.mat)
@@ -12,6 +22,12 @@ class Matrix(object):
         return result
 
     def __sub__(self, other):
+        """
+        - operator is overloaded to do subtraction of
+            two matrices
+        :param other:
+        :return:
+        """
         if len(self.mat) != len(other.mat) or len(self.mat[0]) != len(other.mat[0]):
             raise ValueError("Invalid matrix size")
         result = [[0] * len(self.mat[0])] * len(self.mat)
@@ -21,6 +37,12 @@ class Matrix(object):
         return result
 
     def __mul__(self, other):
+        """
+        * operator is overloaded to do multiplication of
+            two matrices
+        :param other:
+        :return:
+        """
         if len(self.mat) != len(other.mat[0]):
             raise ValueError("Invalid matrix size")
         results = [[1] * len(self.mat[0])] * len(self.mat)
@@ -33,6 +55,10 @@ class Matrix(object):
         return results
 
     def __invert__(self):
+        """
+        ~ operator is overloaded to support functionality of transpose of matrix
+        :return:
+        """
         if len(self.mat) != len(self.mat[0]):
             raise ValueError("Invalid matrix")
         for i in range(len(self.mat)):
