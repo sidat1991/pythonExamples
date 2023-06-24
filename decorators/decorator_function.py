@@ -6,7 +6,7 @@ logging.basicConfig()
 LOG.setLevel(logging.INFO)
 
 
-def time_logger(func):
+def debug_decorator(func):
     def wrapper(*args, **kwargs):
         start_time = time.time()
         LOG.info(f"{func.__name__} started at {start_time}")
@@ -18,22 +18,22 @@ def time_logger(func):
     return wrapper
 
 
-@time_logger
+@debug_decorator
 def mul(a, b):
     return a*b
 
 
-@time_logger
+@debug_decorator
 def add(a, b):
     return a+b
 
 
-@time_logger
+@debug_decorator
 def sub(a, b):
     return a-b
 
 
-@time_logger
+@debug_decorator
 def div(a, b):
     return a//b
 

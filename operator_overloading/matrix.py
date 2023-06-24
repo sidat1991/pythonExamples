@@ -32,6 +32,14 @@ class Matrix(object):
                 results[i][j] = result
         return results
 
+    def __invert__(self):
+        if len(self.mat) != len(self.mat[0]):
+            raise ValueError("Invalid matrix")
+        for i in range(len(self.mat)):
+            for j in range(i, len(self.mat)):
+                self.mat[i][j], self.mat[j][i] = self.mat[j][i], self.mat[i][j]
+        return self
+
 mat1 = [[1,1,1], [1,1,1], [1,1,1]]
 mat2 = [[1,1,1], [1,1,1], [1,1,1]]
 obj1 = Matrix(mat1)
@@ -39,3 +47,7 @@ obj2 = Matrix(mat2)
 print(obj1+obj2)
 print(obj1-obj2)
 print(obj1*obj2)
+
+mat1 = [[1,2,3], [4,5,6], [7,8,9]]
+obj3 = Matrix(mat1)
+print((~obj3).mat)
