@@ -11,13 +11,13 @@ class Cell:
 
 
 @dataclass
-class Row:
-    row: List[Cell] = field(default_factory=list)
+class Col:
+    col: List[Cell] = field(default_factory=list)
 
 
 @dataclass
 class SudokoTable:
-    rows: List[Row] = field(default_factory=list)
+    rows: List[Col] = field(default_factory=list)
 
 
 class Sudoko:
@@ -32,36 +32,36 @@ class Sudoko:
         return self.__n_size
 
     def _get_new_row(self):
-        rw = Row()
+        cl = Col()
         for _ in range(self.__n_size):
-            rw.row.append(Cell())
-        return rw
+            cl.col.append(Cell())
+        return cl
 
     def _initialize_table(self):
         for _ in range(self.__n_size):
             self.__table.rows.append(self._get_new_row())
 
     def _is_number_exist_in_row(self, number: int, row: int) -> bool:
-        for cell in self.__table.rows[row].row:
+        for cell in self.__table.rows[row].col:
             if number == cell.val:
                 return True
         return False
 
     def _is_number_exist_in_col(self, number: int, col: int) -> bool:
         for i in range(self.__n_size):
-            if number == self.__table.rows[i].row[col].val:
+            if number == self.__table.rows[i].col[col].val:
                 return True
         return False
 
     def add_number_to_cell(self, number: int, row: int, col: int) -> None:
-        cell = self.__table.rows[row].row[col]
+        cell = self.__table.rows[row].col[col]
         cell.val = number
 
     def get_value_of_cell(self, row: int, col: int) -> int:
-        return self.__table.rows[row].row[col].val
+        return self.__table.rows[row].col[col].val
 
     def reset_cell(self, row: int, col: int) -> None:
-        sqr = self.__table.rows[row].row[col]
+        sqr = self.__table.rows[row].col[col]
         sqr.val = 0
 
     def _is_number_present_in_grid(self, row: int, col: int, number: int) -> bool:
@@ -69,7 +69,7 @@ class Sudoko:
         startCol = col - col % self.__grid_size
         for i in range(self.__grid_size):
             for j in range(self.__grid_size):
-                if self.__table.rows[i + startRow].row[j + startCol].val == number:
+                if self.__table.rows[i + startRow].col[j + startCol].val == number:
                     return True
         return False
 
